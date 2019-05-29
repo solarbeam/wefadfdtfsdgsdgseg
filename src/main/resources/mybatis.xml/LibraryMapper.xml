@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="vu.lt.mybatis.dao.LibraryMapper">
+
+  <resultMap id="BaseResultMap" type="vu.lt.mybatis.model.Library">
+    <id column="ID" jdbcType="INTEGER" property="id" />
+    <result column="NAME" jdbcType="VARCHAR" property="name" />
+    <collection property="books" javaType="ArrayList" column="id" ofType="Book" select="selectBooksByLibraryId"/>
+    <collection property="patrons" javaType="ArrayList" column="id" ofType="Patron" select="selectPatronsForLibrary"/>
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from PUBLIC.LIBRARY
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="ID" keyProperty="id" parameterType="vu.lt.mybatis.model.Library" useGeneratedKeys="true">
+    insert into PUBLIC.LIBRARY (NAME)
+    values (#{name,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="vu.lt.mybatis.model.Library">
+    update PUBLIC.LIBRARY
+    set NAME = #{name,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select ID, NAME
+    from PUBLIC.LIBRARY
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select ID, NAME
+    from PUBLIC.LIBRARY
+  </select>
+  <select id="selectBooksByLibraryId" resultType="Book">
+    select ID, NAME
+    from PUBLIC.BOOK
+    where LIBRARY_ID= #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectPatronsForLibrary" resultType="Patron">
+    SELECT
+        p.ID,
+        p.NAME
+    FROM public.patron p
+        JOIN PUBLIC.PATRON_LIBRARY pl on p.ID = pl.PATRON_ID
+    WHERE pl.LIBRARY_ID = #{id,jdbcType=INTEGER}
+  </select>
+</mapper>

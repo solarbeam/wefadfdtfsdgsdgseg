@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="vu.lt.mybatis.dao.PatronMapper">
+    <resultMap id="BaseResultMap" type="vu.lt.mybatis.model.Patron">
+        <id column="ID" jdbcType="INTEGER" property="id" />
+        <result column="NAME" jdbcType="VARCHAR" property="name" />
+        <result column="SURNAME" jdbcType="VARCHAR" property="surname" />
+    </resultMap>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from PUBLIC.PATRON
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" keyColumn="ID" keyProperty="id" parameterType="vu.lt.mybatis.model.Patron" useGeneratedKeys="true">
+    insert into PUBLIC.PATRON (NAME, SURNAME)
+    values (#{name,jdbcType=VARCHAR}, #{surname,jdbcType=VARCHAR})
+  </insert>
+    <update id="updateByPrimaryKey" parameterType="vu.lt.mybatis.model.Patron">
+    update PUBLIC.PATRON
+    set NAME = #{name,jdbcType=VARCHAR}, SURNAME = #{surname,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select ID, NAME, SURNAME
+    from PUBLIC.PATRON
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+    <select id="selectAll" resultMap="BaseResultMap">
+    select ID, NAME, SURNAME
+    from PUBLIC.PATRON
+  </select>
+</mapper>

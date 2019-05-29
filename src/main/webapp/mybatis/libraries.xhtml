@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+>
+<h:head/>
+<h:body>
+    <h2>Libraries:</h2>
+    <ol>
+        <ui:repeat value="#{librariesMyBatis.allLibraries}" var="library">
+            <li><h:link value="#{library.name}" outcome="/mybatis/books?libraryId=#{library.id}" /></li>
+        </ui:repeat>
+    </ol>
+    <h:form>
+        <h:inputText value="#{librariesMyBatis.libraryToCreate.name}" required="true" />
+        <h:commandButton value="Add new library" action="#{librariesMyBatis.createLibrary}" />
+    </h:form>
+
+    <h3>Patrons:</h3>
+    <ul>
+        <ui:repeat value="#{patronsMyBatis.allPatrons}" var="patron">
+            <li><h:outputText value="#{patron.id} #{patron.name} #{patron.surname}"  /></li>
+        </ui:repeat>
+    </ul>
+    <h:form>
+        <h:inputText placeholder="Name" value="#{patronsMyBatis.patronToCreate.name}" required="true" />
+        <h:inputText placeholder="Surname" value="#{patronsMyBatis.patronToCreate.surname}" required="true" />
+        <h:commandButton value="Add new patron" action="#{patronsMyBatis.createPatron}" />
+    </h:form>
+    <h:link outcome="/index" value="Back to index" />
+</h:body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+>
+<h:head/>
+<h:body>
+    <h1>#{shopDetails.shop.name}</h1>
+
+    <h2>Items</h2>
+    <ol>
+        <ui:repeat value="#{shopDetails.shop.itemList}" var="item">
+            <li>#{item.item.name}</li>
+        </ui:repeat>
+    </ol>
+
+    <ui:repeat value="#{items.allItems}" var="item">
+        <h:form>
+            <h:commandButton value="#{item.name}" action="#{shopDetails.listItem(item)}"></h:commandButton>
+        </h:form>
+    </ui:repeat>
+
+    <h2>Owners</h2>
+    <ol>
+        <ui:repeat value="#{shopDetails.shop.owner}" var="owner">
+            <li>#{owner.name}</li>
+        </ui:repeat>
+    </ol>
+
+    <h:link value="asdasdasdad" outcome="shop?shopId=#{shopDetails.shop.id}" />
+
+</h:body>
+</html>

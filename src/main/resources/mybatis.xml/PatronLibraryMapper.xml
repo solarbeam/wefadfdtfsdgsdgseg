@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="vu.lt.mybatis.dao.PatronLibraryMapper">
+    <resultMap id="BaseResultMap" type="vu.lt.mybatis.model.PatronLibrary">
+        <id column="patron_id" jdbcType="INTEGER" property="patronId" />
+        <id column="library_id" jdbcType="VARCHAR" property="libraryId" />
+    </resultMap>
+
+    <delete id="deleteByPrimaryKey" parameterType="map">
+        DELETE FROM public.PATRON_LIBRARY
+        WHERE PATRON_ID = #{patrondId,jdbcType=INTEGER}
+          AND LIBRARY_ID = #{libraryId,jdbcType=INTEGER}
+    </delete>
+
+    <insert id="insert" parameterType="vu.lt.mybatis.model.PatronLibrary">
+        INSERT INTO public.PATRON_LIBRARY(PATRON_ID, LIBRARY_ID)
+        VALUES (#{patronId,jdbcType=INTEGER}, #{libraryId,jdbcType=INTEGER})
+    </insert>
+
+    <select id="selectAll" resultMap="BaseResultMap">
+        SELECT
+            patron_id,
+            library_id
+        FROM public.PATRON_LIBRARY
+    </select>
+</mapper>

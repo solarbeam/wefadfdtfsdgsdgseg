@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="vu.lt.mybatis.dao.BookMapper">
+  <resultMap id="BaseResultMap" type="vu.lt.mybatis.model.Book">
+    <id column="ID" jdbcType="INTEGER" property="id" />
+    <result column="NAME" jdbcType="VARCHAR" property="name" />
+    <result column="LIBRARY_ID" jdbcType="INTEGER" property="libraryId" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from PUBLIC.BOOK
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="ID" keyProperty="id" parameterType="vu.lt.mybatis.model.Book" useGeneratedKeys="true">
+    insert into PUBLIC.BOOK (NAME, LIBRARY_ID)
+    values (#{name,jdbcType=VARCHAR}, #{libraryId,jdbcType=INTEGER})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="vu.lt.mybatis.model.Book">
+    update PUBLIC.BOOK
+    set NAME = #{name,jdbcType=VARCHAR},
+      LIBRARY_ID = #{libraryId,jdbcType=INTEGER}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select ID, NAME, LIBRARY_ID
+    from PUBLIC.BOOK
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select ID, NAME, LIBRARY_ID
+    from PUBLIC.BOOK
+  </select>
+</mapper>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:f="http://java.sun.com/jsf/core">
+<h:head/>
+<h:body>
+    <h2>Books stored in #{booksForLibraryMyBatis.library.name} library:</h2>
+    <ol>
+        <ui:repeat value="#{booksForLibraryMyBatis.library.books}" var="book">
+            <li>#{book.name}</li>
+        </ui:repeat>
+    </ol>
+    <h:form>
+        <h:inputText a:placeholder="name" value="#{booksForLibraryMyBatis.bookToCreate.name}" required="true" />
+        <h:commandButton value="Add book to the library" action="#{booksForLibraryMyBatis.createBook}" >
+            <f:param name="libraryId" value="#{booksForLibraryMyBatis.library.id}" />
+        </h:commandButton>
+    </h:form>
+
+    <h3>Patrons registered to #{booksForLibraryMyBatis.library.name} library:</h3>
+    <ol>
+        <ui:repeat value="#{patronsForLibraryMyBatis.library.patrons}" var="patron">
+            <li>#{patron.name}</li>
+        </ui:repeat>
+    </ol>
+    <h:form>
+        <h:inputText a:placeholder="Patron ID" value="#{patronsForLibraryMyBatis.index}" required="true" />
+        <h:commandButton value="Add patron to the library" action="#{patronsForLibraryMyBatis.setPatron}" >
+            <f:param name="libraryId" value="#{patronsForLibraryMyBatis.library.id}" />
+        </h:commandButton>
+    </h:form>
+    <h:link outcome="/mybatis/libraries" value="Back to libraries page"/>
+</h:body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+>
+<h:head/>
+<h:body>
+
+
+
+    <h2>Shops</h2>
+    <ol>
+        <ui:repeat value="#{shops.shopList}" var="shop">
+            <li><h:link value="#{shop.name}" outcome="shop?shopId=#{shop.id}" /></li>
+        </ui:repeat>
+    </ol>
+    <h:form>
+        <h:inputText value="#{shops.shopToCreate.name}" required="true" ></h:inputText>
+        <h:commandButton value="Add new shop" action="#{shops.createShop()}"></h:commandButton>
+    </h:form>
+
+    <h2>Owners</h2>
+    <ol>
+        <ui:repeat value="#{owners.ownerList}" var="owner">
+            <li>#{owner.name}</li>
+        </ui:repeat>
+    </ol>
+    <h:form>
+        <h:inputText value="#{owners.ownerToCreate.name}" required="true" ></h:inputText>
+        <h:commandButton value="Add new owner" action="#{owners.createOwner()}"></h:commandButton>
+    </h:form>
+
+    <h2>Items</h2>
+    <ol>
+        <ui:repeat value="#{items.allItems}" var="item">
+            <li>#{item.name}</li>
+        </ui:repeat>
+    </ol>
+    <h:form>
+        <h:inputText value="#{items.itemToCreate.name}" required="true" ></h:inputText>
+        <h:commandButton value="Add new item" action="#{items.createItem()}"></h:commandButton>
+    </h:form>
+
+    <h:link outcome="mb/index" value="MyBatis implementation"/>
+</h:body>
+</html>
